@@ -18,7 +18,7 @@ import jakarta.persistence.Table;
 @Table(name="users")
 public class UserEntity implements UserDetails{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int user_id;
 
     private String email;

@@ -56,8 +56,15 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+       
         http.authorizeHttpRequests(
-                cfgr -> cfgr.requestMatchers(HttpMethod.GET, "/home/hello").hasRole("ADMIN"));
+                cfgr -> cfgr
+                .requestMatchers("/home/login")
+                .permitAll()
+                .requestMatchers(HttpMethod.GET, "/home/hello")
+                .hasRole("ADMIN"));
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
@@ -78,6 +85,7 @@ public class SecurityConfig {
            
             @Override
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+                System.out.println("calledfk");
                 UserDetails user = userRepository.findByEmail(username);
                 return user;
             }

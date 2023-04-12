@@ -18,14 +18,27 @@ public class JwtTokenFilter extends OncePerRequestFilter{
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+
         final String header = request.getHeader(HttpHeaders.AUTHORIZATION);
 
+        System.out.println("charming" +  header);
+        
         if(header == null || !header.startsWith("Bearer ")){
             filterChain.doFilter(request, response);
             return;
         }
 
         final String token = header.split(" ")[1].trim();
+        System.out.println("token is " + token);
+        
+        
+        // verify token is valid
+
+        // get username from token
+
+        // ensure token username matches with user
+
+        // authenticate user
         
 
 
